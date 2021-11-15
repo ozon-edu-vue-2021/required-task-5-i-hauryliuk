@@ -44,7 +44,7 @@ export default {
 html,
 body,
 #app {
-  height: 100%;
+  min-height: 100vh;
 }
 
 * {
@@ -53,8 +53,8 @@ body,
 
 .main-nav {
   padding: 0.4em;
-  padding-top: 0.6em;
-  background-color: #f07faa;
+  padding-top: 1em;
+  background-color: #d8d8d8;
 }
 
 .nav-link {
