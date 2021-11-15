@@ -10,7 +10,9 @@
         class="nav-link"
       >Корзина</router-link>
     </nav>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
