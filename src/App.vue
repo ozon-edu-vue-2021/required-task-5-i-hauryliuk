@@ -17,8 +17,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'App',
+  created() {
+    this.getProducts();
+  },
+  methods: {
+    ...mapActions('products', {
+      getProducts: 'getAllProducts',
+    }),
+  },
 };
 </script>
 
