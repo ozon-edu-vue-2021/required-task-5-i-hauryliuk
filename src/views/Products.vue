@@ -3,7 +3,7 @@
     <h2 class="title">Товары</h2>
     <div class="products">
       <template v-if="products.length">
-        <ProductCard v-for="product in products" :key="product.uid" :product="product" />
+        <ProductsProductCard v-for="product in products" :key="product.uid" :product="product" />
       </template>
       <template v-else>
         <p class="no-products">Товары отсутствуют</p>
@@ -14,12 +14,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import ProductCard from '@/components/ProductCard';
+import ProductsProductCard from '@/components/ProductCard/ProductsProductCard.vue';
 
 export default {
   name: 'Products',
   components: {
-    ProductCard,
+    ProductsProductCard,
   },
   computed: {
     ...mapState('products', {
