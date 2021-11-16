@@ -14,6 +14,12 @@ const getters = {
       .reduce((total, product) => total + product.price * product.quantity, 0)
       .toFixed(2);
   },
+  getCartTotalQuantity: (state, getters) => {
+    return getters.getCartProducts.reduce(
+      (total, product) => total + product.quantity,
+      0
+    );
+  },
   getCartProductIndex: (state) => (id) =>
     state.cart.findIndex((item) => item.id === id),
 };

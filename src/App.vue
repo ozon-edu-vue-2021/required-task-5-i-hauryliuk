@@ -1,14 +1,8 @@
 <template>
   <div id="app">
     <nav class="main-nav">
-      <router-link
-        to="/"
-        class="nav-link"
-      >Главная</router-link>
-      <router-link
-        to="/cart"
-        class="nav-link"
-      >Корзина</router-link>
+      <router-link to="/" class="nav-link">Главная</router-link>
+      <router-link to="/cart" class="nav-link">Корзина</router-link>
     </nav>
     <keep-alive>
       <router-view></router-view>

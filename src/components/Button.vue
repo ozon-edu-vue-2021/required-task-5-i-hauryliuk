@@ -25,4 +25,8 @@ export default {
   width: 100%;
   padding: 0.3em;
 }
+
+.btn:hover {
+  cursor: pointer;
+}
 </style>

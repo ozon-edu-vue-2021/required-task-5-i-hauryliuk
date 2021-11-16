@@ -68,6 +68,7 @@ export default {
   order: -1;
   margin-bottom: 1em;
   border-radius: 6px;
+  vertical-align: top;
 }
 
 .product-img {
