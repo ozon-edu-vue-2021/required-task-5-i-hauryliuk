@@ -1,30 +1,42 @@
 <template>
   <div class="product-card">
-    <div class="product-card__info">
-      <div class="product-card__img">
-        <img
-          class="product-img"
-          :src="require('@/assets/images/' + product.imgName)"
-          :alt="product.dish"
-        />
+    <div class="product-card__content">
+      <div class="product-card__info">
+        <div class="product-card__img">
+          <img
+            class="product-img"
+            :src="require('@/assets/images/' + product.imgName)"
+            :alt="product.dish"
+          />
+        </div>
+        <div class="product-card__descr">
+          <h3 class="product-card__title">{{ product.dish }}</h3>
+          <p>{{ product.description }}</p>
+        </div>
       </div>
-      <div class="product-card__descr">
-        <h3 class="product-card__title">{{ product.dish }}</h3>
-        <p>{{ product.description }}</p>
+      <div class="product-card__summary">
+        <p class="summary-text">
+          {{ product.quantity }} шт. × {{ product.price }} ₽
+        </p>
+        <p class="summary-text summary-text_total">
+          Всего: {{ getProductTotalCost }} ₽
+        </p>
       </div>
     </div>
-    <div class="product-card__summary">
-      <p class="summary-text">
-        {{ product.quantity }} шт. × {{ product.price }} ₽
-      </p>
-      <p class="summary-text summary-text_total">
-        Всего: {{ getProductTotalCost }} ₽
-      </p>
+    <div class="product-card__actions">
+      <Button
+        label="Удалить"
+        class="remove-btn"
+        @button-clicked="removeFromCart(product.id)"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Button from '@/components/Button.vue';
+import { mapActions } from 'vuex';
+
 export default {
   name: 'CartProductCard',
   props: {
@@ -33,10 +45,18 @@ export default {
       required: true,
     },
   },
+  components: {
+    Button,
+  },
   computed: {
     getProductTotalCost() {
       return (this.product.quantity * this.product.price).toFixed(2);
     },
+  },
+  methods: {
+    ...mapActions('cart', {
+      removeFromCart: 'removeProductFromCart',
+    }),
   },
 };
 </script>
@@ -44,11 +64,17 @@ export default {
 <style scoped>
 .product-card {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 1em;
   margin: 1em;
   border: 1px solid #d8d8d8;
   border-radius: 0.5em;
+}
+
+.product-card__content {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
 }
 
 .product-card__info {
@@ -94,5 +120,17 @@ export default {
   margin-bottom: 0;
   padding-top: 0.5em;
   border-top: 1px solid #6284a3;
+}
+
+.product-card__actions {
+  align-self: end;
+}
+
+.remove-btn {
+  border: none;
+  padding: 0;
+  font-size: 0.8em;
+  color: inherit;
+  background-color: transparent;
 }
 </style>

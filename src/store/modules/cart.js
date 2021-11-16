@@ -31,8 +31,14 @@ const mutations = {
       quantity: 1,
     });
   },
+  removeProduct: (state, index) => {
+    state.cart.splice(index, 1);
+  },
   incrementProductQuantity: (state, index) => {
     state.cart[index].quantity++;
+  },
+  decrementProductQuantity: (state, index) => {
+    state.cart[index].quantity--;
   },
 };
 
@@ -43,6 +49,14 @@ const actions = {
       commit('incrementProductQuantity', cartProductIndex);
     } else {
       commit('addProduct', productId);
+    }
+  },
+  removeProductFromCart: ({ state, commit, getters }, productId) => {
+    const cartProductIndex = getters.getCartProductIndex(productId);
+    if (state.cart[cartProductIndex].quantity > 1) {
+      commit('decrementProductQuantity', cartProductIndex);
+    } else {
+      commit('removeProduct', cartProductIndex);
     }
   },
 };

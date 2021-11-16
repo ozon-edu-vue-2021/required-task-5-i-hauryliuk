@@ -14,6 +14,7 @@
     <div class="order-block__action">
       <Button
         label="Оформить заказ"
+        class="order-btn"
         @button-clicked="checkoutOrder(cartProducts)"
       />
     </div>
@@ -79,5 +80,9 @@ export default {
 
 .order-block__info {
   padding: 1em;
+}
+
+.order-btn {
+  color: inherit;
 }
 </style>
