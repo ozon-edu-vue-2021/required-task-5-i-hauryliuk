@@ -13,8 +13,15 @@
     </div>
     <div class="product-card__action">
       <Button
+       v-if="!quantity(product.id)"
         label="В корзину"
         @button-clicked="addToCart(product.id)"
+      />
+      <QuantityControl
+        v-else
+        :value="quantity(product.id)"
+        @decrease="deleteFromCart(product.id)"
+        @increase="addToCart(product.id)"
       />
     </div>
   </div>
@@ -22,12 +29,14 @@
 
 <script>
 import Button from '@/components/Button.vue';
-import {mapActions} from 'vuex';
+import QuantityControl from '@/components/QuantityControl.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'ProductsProductCart',
   components: {
     Button,
+    QuantityControl,
   },
   props: {
     product: {
@@ -35,9 +44,15 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters('cart', {
+      quantity: 'getQuantityById',
+    }),
+  },
   methods: {
     ...mapActions('cart', {
       addToCart: 'addProductToCart',
+      deleteFromCart: 'removeProductFromCart',
     }),
   },
 };
@@ -81,5 +96,10 @@ export default {
   align-self: end;
   margin: 0;
   font-weight: bold;
+}
+
+.product-card__action {
+  display: flex;
+  justify-content: center;
 }
 </style>

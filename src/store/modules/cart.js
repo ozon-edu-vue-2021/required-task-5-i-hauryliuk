@@ -22,6 +22,9 @@ const getters = {
   },
   getCartProductIndex: (state) => (id) =>
     state.cart.findIndex((item) => item.id === id),
+  getQuantityById: (state) => (id) => {
+    return state.cart.find((item) => item.id === id)?.quantity;
+  },
 };
 
 const mutations = {
