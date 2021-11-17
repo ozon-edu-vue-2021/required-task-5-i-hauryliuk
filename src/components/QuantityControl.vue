@@ -1,14 +1,8 @@
 <template>
   <div class="quantity-control">
-    <button
-      class="quantity-control__button"
-      @click="minusClicked"
-    >−</button>
+    <button class="quantity-control__button" @click="minusClicked">−</button>
     <span class="quantity-control__value">{{ value }}</span>
-    <button
-      class="quantity-control__button"
-      @click="plusClicked"
-    >+</button>
+    <button class="quantity-control__button" @click="plusClicked">+</button>
   </div>
 </template>
 

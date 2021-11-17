@@ -10,10 +10,22 @@
         />
       </div>
       <p class="product-card__price">{{ product.price }} ₽</p>
+      <Button
+        v-if="!isFavorite(product.id)"
+        label="В избранное"
+        class="btn_link"
+        @button-clicked="addToFavorites(product.id)"
+      />
+      <Button
+        v-else
+        label="Из избранного"
+        class="btn_link"
+        @button-clicked="removeFromFavorites(product.id)"
+      />
     </div>
     <div class="product-card__action">
       <Button
-       v-if="!quantity(product.id)"
+        v-if="!quantity(product.id)"
         label="В корзину"
         @button-clicked="addToCart(product.id)"
       />
@@ -30,7 +42,7 @@
 <script>
 import Button from '@/components/Button.vue';
 import QuantityControl from '@/components/QuantityControl.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'ProductsProductCart',
@@ -48,12 +60,14 @@ export default {
     ...mapGetters('cart', {
       quantity: 'getQuantityById',
     }),
+    ...mapGetters('products', ['isFavorite']),
   },
   methods: {
     ...mapActions('cart', {
       addToCart: 'addProductToCart',
       deleteFromCart: 'removeProductFromCart',
     }),
+    ...mapMutations('products', ['addToFavorites', 'removeFromFavorites']),
   },
 };
 </script>
@@ -72,7 +86,7 @@ export default {
 .product-card__info {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 .product-card__title {
@@ -96,6 +110,16 @@ export default {
   align-self: end;
   margin: 0;
   font-weight: bold;
+}
+
+.btn_link {
+  align-self: start;
+  width: auto;
+  padding: 0;
+  font-size: 0.8em;
+  border: none;
+  background: transparent;
+  color: #8f8f8f;
 }
 
 .product-card__action {
