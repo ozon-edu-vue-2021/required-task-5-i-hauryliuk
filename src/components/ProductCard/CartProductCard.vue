@@ -24,18 +24,18 @@
       </div>
     </div>
     <div class="product-card__actions">
-      <Button
-        label="Удалить"
-        class="remove-btn"
-        @button-clicked="removeFromCart(product.id)"
+      <QuantityControl
+        :value="quantity(product.id)"
+        @decrease="deleteFromCart(product.id)"
+        @increase="addToCart(product.id)"
       />
     </div>
   </div>
 </template>
 
 <script>
-import Button from '@/components/Button.vue';
-import { mapActions } from 'vuex';
+import QuantityControl from '@/components/QuantityControl.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'CartProductCard',
@@ -46,16 +46,20 @@ export default {
     },
   },
   components: {
-    Button,
+    QuantityControl,
   },
   computed: {
     getProductTotalCost() {
       return (this.product.quantity * this.product.price).toFixed(2);
     },
+    ...mapGetters('cart', {
+      quantity: 'getQuantityById',
+    }),
   },
   methods: {
     ...mapActions('cart', {
-      removeFromCart: 'removeProductFromCart',
+      addToCart: 'addProductToCart',
+      deleteFromCart: 'removeProductFromCart',
     }),
   },
 };
@@ -124,13 +128,5 @@ export default {
 
 .product-card__actions {
   align-self: end;
-}
-
-.remove-btn {
-  border: none;
-  padding: 0;
-  font-size: 0.8em;
-  color: inherit;
-  background-color: transparent;
 }
 </style>
