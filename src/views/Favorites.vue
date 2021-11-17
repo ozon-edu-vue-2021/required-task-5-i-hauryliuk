@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2 class="title">Товары</h2>
+    <h2 class="title">Избранные товары</h2>
     <div class="products">
       <template v-if="products.length">
         <ProductsProductCard
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import ProductsProductCard from '@/components/ProductCard/ProductsProductCard.vue';
 
 export default {
@@ -26,8 +26,8 @@ export default {
     ProductsProductCard,
   },
   computed: {
-    ...mapState('products', {
-      products: 'allProducts',
+    ...mapGetters('products', {
+      products: 'getFavoriteProducts',
     }),
   },
 };

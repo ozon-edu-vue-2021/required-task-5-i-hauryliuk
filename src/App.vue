@@ -2,6 +2,7 @@
   <div id="app">
     <nav class="main-nav">
       <router-link to="/" class="nav-link">Главная</router-link>
+      <router-link to="/favorites" class="nav-link">Избранные</router-link>
       <router-link to="/cart" class="nav-link">Корзина</router-link>
     </nav>
     <keep-alive>

@@ -10,6 +10,9 @@ const getters = {
     state.allProducts.findIndex((item) => item.id === id),
   isFavorite: (state, getters) => (id) =>
     state.allProducts[getters.getProductIndex(id)].favorite,
+  getFavoriteProducts: (state) => {
+    return state.allProducts.filter(({ favorite }) => favorite);
+  },
 };
 
 const mutations = {
